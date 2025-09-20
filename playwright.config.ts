@@ -17,12 +17,12 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-     baseURL: 'https://365.uat.fastcollab.com',
+     baseURL: 'https://365.uat.fastcollab.com/',
      trace: 'on-first-retry',
      headless : false,
      actionTimeout : 50000,
      launchOptions:{
-      slowMo : 1000
+      slowMo : 2000
      }
   },
   projects: [
@@ -36,9 +36,9 @@ export default defineConfig({
     //   use: { ...devices['Desktop Firefox'] },
     // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
   ],
 });

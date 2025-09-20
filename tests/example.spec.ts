@@ -10,7 +10,7 @@ test('Login to the application', async ({ page }) => {
     await loginPage.password.fill('Test@123');
     await loginPage.loginBtn.click();
     //assertion to check that after login the application navigates to the dashboard or not
-    await loginPage.verifyDashboard();
+    await loginPage.verifyDashboardTitle();
 });
 
 test.only('User can create a travel trip', async ({ page }) => {
@@ -20,7 +20,7 @@ test.only('User can create a travel trip', async ({ page }) => {
   await loginPage.username.fill('user.re@gmail.com');
   await loginPage.password.fill('Test@123');
   await loginPage.loginBtn.click();
-  await loginPage.verifyDashboard();
+  await loginPage.verifyDashboardTitle();
 
   // Navigate to Travel Link
   const createTripPage = new CreateTripPage(page);

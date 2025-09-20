@@ -22,9 +22,11 @@ When('I navigate to Travel and create a trip', async ({ page }) => {
   // Dates
   // const startDate = await createTripPage.startDate();
   // await createTripPage.selectEndDate(startDate);
-  await createTripPage.datestart.click();
-  await createTripPage.dateend.click();
-
+    await createTripPage.tripStartDate.click();
+    await createTripPage.datestart.click();
+    await page.locator('.cdk-overlay-backdrop').click();
+    await createTripPage.tripEndDate.click();
+    await createTripPage.dateend.click();
 
   // Reason
   await createTripPage.selectRandomReason();
