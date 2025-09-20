@@ -31,25 +31,25 @@ Then('I should be navigated to the dashboard page', async ({page}) => {
 });
 
 Then('I should see the flight details card', async ({ page }) => {
-  await expect(loginPage.expensesSection());
+  await loginPage.expensesSection();
   // await expect(page.locator('.card-sec.flight-details')).toBeVisible();
 });
 
 Then('I should see 6 dashboard sections', async ({ page }) => {
-  await expect(loginPage.sections());
+  await loginPage.sections();
 });
 
 Then('I should see the company logo', async ({ page }) => {
-  await expect(loginPage.logo());
+  await loginPage.logo();
   // await expect(page.locator("img[alt='Logo']")).toBeVisible();
 });
 
 Then('I should see the {string} section', async ({ page }, sectionText: string) => {
-  await expect(loginPage.travelLink());
+  await loginPage.travelLink();
   // await expect(page.getByText(sectionText, { exact: true })).toBeVisible();
 });
 
 Then('I should see the user profile dropdown', async ({ page }) => {
-  await expect(loginPage.expensesLink());
+  await loginPage.expensesLink();
   // await expect(page.locator('.profile-section-drop-down')).toBeVisible();
 });
