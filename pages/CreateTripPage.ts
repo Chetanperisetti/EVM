@@ -172,29 +172,47 @@ export class CreateTripPage {
     }
   }
 
-  async pickFromCity() {
-    const field = this.page.locator(
-      "div.cityairportlist.col-md-6.dropdownitem-border.fsw-inputbox.search-from-city input[placeholder='Select']"
-    );
-    await field.click();
-    const options = this.page.locator("mat-option, div[role='option'], li");
-    await options.first().waitFor();
-    const count = await options.count();
-    const index = Math.floor(Math.random() * count);
-    await options.nth(index).click();
-  }
+async pickFromCity() {
+  const field = this.page.locator(
+    "div.cityairportlist.col-md-6.dropdownitem-border.fsw-inputbox.search-from-city input[placeholder='Select']"
+  );
+  await field.click();
 
-  async pickToCity() {
-    const field = this.page.locator(
-      "div.cityairportlist.col-md-6.dropdownitem-border.fsw-inputbox.search-to-city input[placeholder='Select']"
-    );
-    await field.click();
-    const options = this.page.locator("mat-option, div[role='option'], li");
-    await options.first().waitFor();
-    const count = await options.count();
-    const index = Math.floor(Math.random() * count);
-    await options.nth(index).click();
-  }
+  const options = this.page.locator("mat-option:visible");
+  await expect(options.first()).toBeVisible({ timeout: 10000 });
+
+  const count = await options.count();
+  const index = Math.floor(Math.random() * count);
+  await options.nth(index).click();
+}
+
+async pickToCity() {
+  const field = this.page.locator(
+    "div.cityairportlist.col-md-6.dropdownitem-border.fsw-inputbox.search-to-city input[placeholder='Select']"
+  );
+  await field.click();
+
+  // Wait specifically for the correct dropdown panel to appear
+  const dropdownPanel = this.page.locator("#mat-autocomplete-12");
+  await expect(dropdownPanel).toBeVisible({ timeout: 10000 });
+
+  // Narrow the options only within this dropdown
+  const options = dropdownPanel.locator("mat-option span.airportname");
+
+  // Ensure at least one option is visible
+  await expect(options.first()).toBeVisible({ timeout: 10000 });
+
+  const count = await options.count();
+  const index = Math.floor(Math.random() * count);
+  const selectedOption = options.nth(index);
+
+  const optionText = await selectedOption.textContent();
+  console.log(`Selected 'To' city: ${optionText}`);
+
+  // Click the full mat-option, not just the span
+  await selectedOption.locator('..').click(); // Move to parent mat-option
+}
+
 
   async bookTicket() {
     await this.page

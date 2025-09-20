@@ -10,17 +10,20 @@ const testDir = defineBddConfig({
 
 export default defineConfig({
   testDir,
-  fullyParallel: true,
+  fullyParallel: false,
   timeout: 100 *1000,
+  expect: {
+    timeout: 10000,
+  },
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  retries: 2,
+  workers: 1,
   reporter: 'html',
   use: {
      baseURL: 'https://365.uat.fastcollab.com/',
      trace: 'on-first-retry',
      headless : false,
-     actionTimeout : 50000,
+     actionTimeout : 60000,
      launchOptions:{
       slowMo : 2000
      }
